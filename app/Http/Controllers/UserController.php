@@ -4,7 +4,11 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreUserRequest;
 use App\Http\Requests\UpdateUserRequest;
+use App\Http\Resources\User\UserResource;
+use App\Http\Resources\User\UserResourceCollection;
 use App\Models\User;
+use Illuminate\Http\Response;
+use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller
 {
@@ -13,15 +17,8 @@ class UserController extends Controller
      */
     public function index(): UserResourceCollection
     {
-        return new UserResourceCollection(User::all());
-    }
 
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
+        return new UserResourceCollection(User::all());
     }
 
     /**
@@ -29,7 +26,13 @@ class UserController extends Controller
      */
     public function store(StoreUserRequest $request)
     {
-        //
+        $data = $request->validated();
+        
+        if (isset($data['password'])) {
+            $data['password'] = Hash::make($data['password']);
+        }
+        $model = User::query()->create($data);
+        return new UserResource($model);
     }
 
     /**
@@ -37,15 +40,7 @@ class UserController extends Controller
      */
     public function show(User $user)
     {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(User $user)
-    {
-        //
+        return new UserResource($user);
     }
 
     /**
@@ -53,7 +48,13 @@ class UserController extends Controller
      */
     public function update(UpdateUserRequest $request, User $user)
     {
-        //
+        $data = $request->validated();
+        
+        if (isset($data['password'])) {
+            $data['password'] = Hash::make($data['password']);
+        }
+        $user->update($data);
+        return new UserResource($user);
     }
 
     /**
@@ -61,6 +62,7 @@ class UserController extends Controller
      */
     public function destroy(User $user)
     {
-        //
+        $user->delete();
+        return response()->json([], Response::HTTP_NO_CONTENT);
     }
 }
