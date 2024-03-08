@@ -12,7 +12,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('users', function (Blueprint $table) {
-            $table->id('id');
+            $table->uuid('id')->primary();
             $table->string('first_name')->comment('Имя');
             $table->string('middle_name')->comment('Фамилия');
             $table->string('last_name')->nullable()->comment('Отчество');
@@ -22,7 +22,7 @@ return new class extends Migration
             $table->string('city')->nullable()->comment('Город');
             $table->string('passport')->nullable()->comment('Паспорт');
             $table->string('licence')->nullable()->comment('Водительские права');
-            $table->remember_token('remember_token')->nullable();
+            $table->softDeletes();
             $table->timestamps();
         });
     }

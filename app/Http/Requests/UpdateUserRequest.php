@@ -4,6 +4,23 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
+/**
+ * User Update Request Validation
+ *
+ * @OA\Schema(
+ *      schema="UserUpdateRequest",
+ *
+ *      @OA\Property(property="last_name", type="string", example="", description="Фамилия"),
+ *      @OA\Property(property="first_name", type="string", example="", description="Имя"),
+ *      @OA\Property(property="middle_name", type="string", example="", description="Отчество"),
+ *      @OA\Property(property="email", type="string", example="", description="Email"),
+ *      @OA\Property(property="phone_number", type="char", example="", description="Номер телефона"),
+ *      @OA\Property(property="password", type="string", example="", description="Пароль"),
+ *      @OA\Property(property="city", type="string", example="", description="Город"),
+ *      @OA\Property(property="passport", type="string", example="", description="Паспорт"),
+ *      @OA\Property(property="licence", type="string", example="", description="Водительские права"),
+ * )
+ */
 class UpdateUserRequest extends FormRequest
 {
     /**
