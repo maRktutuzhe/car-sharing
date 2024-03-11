@@ -20,7 +20,7 @@ class CarMakeResource extends JsonResource
         $response = [
             'id' => $this->resource->id,
             'name' => $this->resource->name,
-            'country' => $this->resource->countyr,
+            'country' => $this->resource->country,
         ];
 
         return $response;

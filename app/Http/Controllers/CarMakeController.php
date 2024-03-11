@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\StoreCarMakeRequest;
-use App\Http\Requests\UpdateCarMakeRequest;
+use App\Http\Requests\CarMake\StoreCarMakeRequest;
+use App\Http\Requests\CarMake\UpdateCarMakeRequest;
 use App\Http\Resources\CarMake\CarMakeResource;
 use App\Http\Resources\CarMake\CarMakeResourceCollection;
 use App\Models\CarMake;
@@ -67,9 +67,9 @@ class CarMakeController extends Controller
     public function store(StoreCarMakeRequest $request): CarMakeResource
     {
         $data = $request->validated();
-        $model = CarMake::query()->create($data);
+        $carMake = CarMake::query()->create($data);
 
-        return new CarMakeResource($model);
+        return new CarMakeResource($carMake);
     }
 
     /**
@@ -98,9 +98,9 @@ class CarMakeController extends Controller
      * @param StoreCarMakeRequest $request
      * @return CarMakeResource
      */
-    public function show(CarMake $model): CarMakeResource
+    public function show(CarMake $carMake): CarMakeResource
     {
-        return new CarMakeResource($model);
+        return new CarMakeResource($carMake);
     }
 
     /**
@@ -131,15 +131,15 @@ class CarMakeController extends Controller
      *     @OA\Response(response="422", description="Возвращает ошибки валидации")
      * )
      * @param UpdateCarMakeRequest $request
-     * @param CarMake $model
+     * @param CarMake $carMake
      * @return CarMakeResource
      */
-    public function update(UpdateCarMakeRequest $request, CarMake $model): CarMakeResource
+    public function update(UpdateCarMakeRequest $request, CarMake $carMake): CarMakeResource
     {
         $data = $request->validated();
-        $model->update($data);
+        $carMake->update($data);
 
-        return new CarMakeResource($model);
+        return new CarMakeResource($carMake);
     }
 
     /**
@@ -164,12 +164,12 @@ class CarMakeController extends Controller
      *         @OA\JsonContent(example="")
      *     )
      * )
-     * @param CarMake $model
+     * @param CarMake $carMake
      * @return JsonResponse
      */
-    public function destroy(CarMake $model): JsonResponse
+    public function destroy(CarMake $carMake): JsonResponse
     {
-        $model->delete();
+        $carMake->delete();
         return response()->json([], Response::HTTP_NO_CONTENT);
     }
 }

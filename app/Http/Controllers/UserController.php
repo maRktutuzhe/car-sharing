@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\StoreUserRequest;
-use App\Http\Requests\UpdateUserRequest;
+use App\Http\Requests\User\StoreUserRequest;
+use App\Http\Requests\User\UpdateUserRequest;
 use App\Http\Resources\User\UserResource;
 use App\Http\Resources\User\UserResourceCollection;
 use App\Models\User;
@@ -73,8 +73,8 @@ class UserController extends Controller
             $data['password'] = Hash::make($data['password']);
         }
 
-        $model = User::query()->create($data);
-        return new UserResource($model);
+        $user = User::query()->create($data);
+        return new UserResource($user);
     }
 
     /**

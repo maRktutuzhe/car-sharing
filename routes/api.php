@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\API\AuthController;
+use App\Http\Controllers\CarMakeController;
 use App\Http\Controllers\UserController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -18,6 +19,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::resources([
     'users' => UserController::class,
+    'carmakes' => CarMakeController::class,
 ]);
 
 Route::prefix('auth')->middleware('api')->controller(AuthController::class)->group(function () {
