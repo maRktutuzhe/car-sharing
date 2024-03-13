@@ -28,6 +28,8 @@ class UserResource extends JsonResource
             'city' => $this->resource->city,
             'passport' => $this->resource->passport,
             'licence' => $this->resource->licence,
+            'status' => $this->resource->status,
+            'balance' => $this->resource->balance,
         ];
 
         return $response;

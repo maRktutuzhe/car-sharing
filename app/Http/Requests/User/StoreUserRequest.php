@@ -48,6 +48,8 @@ class StoreUserRequest extends FormRequest
             'city' => 'nullable|string',
             'passport' => 'nullable|string',
             'licence' => 'nullable|string',
+            'status' => 'required|string|enum:UserStatus::class',
+            'balance' => 'required|integer',
         ];
     }
 }

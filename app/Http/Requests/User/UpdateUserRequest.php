@@ -48,6 +48,8 @@ class UpdateUserRequest extends FormRequest
             'city' => 'nullable|string',
             'passport' => 'nullable|string',
             'licence' => 'nullable|string',
+            'status' => 'filled|string|enum:UserStatus::class',
+            'balance' => 'filled|integer',
         ];
     }
 }

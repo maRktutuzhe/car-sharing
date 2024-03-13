@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Enums\UserStatus;
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Tymon\JWTAuth\Contracts\JWTSubject;
@@ -45,6 +46,12 @@ class User extends Authenticatable implements JWTSubject
         'phone_number',
         'city',
         'password',
+        'status',
+        'balance',
+    ];
+
+    protected $enumCasts = [
+        'status' => UserStatus::class,
     ];
 
     /**

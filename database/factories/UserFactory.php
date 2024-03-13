@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Enums\UserStatus;
 use App\Models\Car;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Facades\Hash;
@@ -18,6 +19,9 @@ class UserFactory extends Factory
      */
     public function definition(): array
     {
+        $statusValues = UserStatus::values();
+        $randomStatus = $statusValues[array_rand($statusValues)];
+
         return [
             'first_name' => fake()->firstName(),
             'middle_name' => fake()->firstName(),
@@ -26,6 +30,8 @@ class UserFactory extends Factory
             'phone_number' => "7" . rand(1000000000, 9999999999),
             'city' => fake()->city(),
             'password' => Hash::make('password'),
+            'status' => $randomStatus,
+            'balance' => fake()->randomNumber(6, false),
         ];
     }
 }

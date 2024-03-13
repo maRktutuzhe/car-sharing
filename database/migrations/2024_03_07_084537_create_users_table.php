@@ -22,6 +22,8 @@ return new class extends Migration
             $table->string('city')->nullable()->comment('Город');
             $table->string('passport')->nullable()->comment('Паспорт');
             $table->string('licence')->nullable()->comment('Водительские права');
+            $table->string('status')->comment('Статус');
+            $table->integer('balance')->comment('Баланс');
             $table->softDeletes();
             $table->timestamps();
         });
