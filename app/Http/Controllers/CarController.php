@@ -2,15 +2,15 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\CarMake\StoreCarMakeRequest;
-use App\Http\Requests\CarMake\UpdateCarMakeRequest;
-use App\Http\Resources\CarMake\CarMakeResource;
-use App\Http\Resources\CarMake\CarMakeResourceCollection;
-use App\Models\CarMake;
+use App\Http\Requests\Car\StoreCarRequest;
+use App\Http\Requests\Car\UpdateCarRequest;
+use App\Http\Resources\Car\CarResource;
+use App\Http\Resources\Car\CarResourceCollection;
+use App\Models\Car;
 use Illuminate\Http\Response;
 use Symfony\Component\HttpFoundation\JsonResponse;
 
-class CarMakeController extends Controller
+class CarController extends Controller
 {
     public function __construct()
     {
@@ -21,8 +21,8 @@ class CarMakeController extends Controller
      * Index API Method
      *
      * @OA\Get(
-     *     path="/api/carmakes",
-     *     operationId="/api/carmakes(GET)",
+     *     path="/api/cars",
+     *     operationId="/api/cars(GET)",
      *     summary="Список моделей",
      *     tags={"Марки машин"},
      *     security={{"bearerAuth":{}}},
@@ -34,25 +34,25 @@ class CarMakeController extends Controller
      * )
      *
      * Возвращает список марок
-     * @return CarMakeResourceCollection
+     * @return CarResourceCollection
      */
-    public function index(): CarMakeResourceCollection
+    public function index(): CarResourceCollection
     {
-        return new CarMakeResourceCollection(CarMake::all());
+        return new CarResourceCollection(Car::all());
     }
 
     /**
      * Store API Method
      *
      * @OA\Post (
-     *     path="/api/carmakes",
-     *     operationId="/api/carmakes(POST)",
+     *     path="/api/cars",
+     *     operationId="/api/cars(POST)",
      *     summary="Добавление записи",
      *     tags={"Марки машин"},
      *     security={{"bearerAuth":{}}},
      *     @OA\RequestBody(
      *       required=true,
-     *       @OA\JsonContent(ref="#/components/schemas/StoreCarMakeRequest")
+     *       @OA\JsonContent(ref="#/components/schemas/StoreCarRequest")
      *     ),
      *     @OA\Response(
      *         response="201",
@@ -61,23 +61,23 @@ class CarMakeController extends Controller
      *     ),
      *     @OA\Response(response="422", description="Возвращает ошибки валидации")
      * )
-     * @param StoreCarMakeRequest $request
-     * @return CarMakeResource
+     * @param StoreCarRequest $request
+     * @return CarResource
      */
-    public function store(StoreCarMakeRequest $request): CarMakeResource
+    public function store(StoreCarRequest $request): CarResource
     {
         $data = $request->validated();
-        $carmake = CarMake::query()->create($data);
+        $car = Car::query()->create($data);
 
-        return new CarMakeResource($carmake);
+        return new CarResource($car);
     }
 
     /**
      * Show API Method
      *
      * @OA\Get(
-     *     path="/api/carmakes/{id}",
-     *     operationId="/api/carmakes/{id}(GET)",
+     *     path="/api/cars/{id}",
+     *     operationId="/api/cars/{id}(GET)",
      *     summary="Получить запись",
      *     tags={"Марки машин"},
      *     security={{"bearerAuth":{}}},
@@ -95,20 +95,20 @@ class CarMakeController extends Controller
      *     @OA\Response(response="401",description="Unauthorized"),
      *     @OA\Response(response="404",description="Not found"),
      * )
-     * @param StoreCarMakeRequest $request
-     * @return CarMakeResource
+     * @param StoreCarRequest $request
+     * @return CarResource
      */
-    public function show(CarMake $carmake): CarMakeResource
+    public function show(Car $car): CarResource
     {
-        return new CarMakeResource($carmake);
+        return new CarResource($car);
     }
 
     /**
      * Update API Method
      *
      * @OA\Put (
-     *     path="/api/carmakes/{id}",
-     *     operationId="/api/carmakes/{id}(PUT)",
+     *     path="/api/cars/{id}",
+     *     operationId="/api/cars/{id}(PUT)",
      *     summary="Обновление записи",
      *     tags={"Марки машин"},
      *     security={{"bearerAuth":{}}},
@@ -121,7 +121,7 @@ class CarMakeController extends Controller
      *     ),
      *     @OA\RequestBody(
      *       required=true,
-     *       @OA\JsonContent(ref="#/components/schemas/UpdateCarMakeRequest")
+     *       @OA\JsonContent(ref="#/components/schemas/UpdateCarRequest")
      *     ),
      *     @OA\Response(
      *         response="200",
@@ -130,24 +130,24 @@ class CarMakeController extends Controller
      *     ),
      *     @OA\Response(response="422", description="Возвращает ошибки валидации")
      * )
-     * @param UpdateCarMakeRequest $request
-     * @param CarMake $carMake
-     * @return CarMakeResource
+     * @param UpdateCarRequest $request
+     * @param Car $car
+     * @return CarResource
      */
-    public function update(UpdateCarMakeRequest $request, CarMake $carmake): CarMakeResource
+    public function update(UpdateCarRequest $request, Car $car): CarResource
     {
         $data = $request->validated();
-        $carmake->update($data);
+        $car->update($data);
 
-        return new CarMakeResource($carmake);
+        return new CarResource($car);
     }
 
     /**
      * Delete API Method
      *
      * @OA\Delete(
-     *     path="/api/carmakes/{id}",
-     *     operationId="/api/carmakes/{id}(DELETE)",
+     *     path="/api/cars/{id}",
+     *     operationId="/api/cars/{id}(DELETE)",
      *     summary="Удалить запись",
      *     tags={"Марки машин"},
      *     security={{"bearerAuth":{}}},
@@ -164,12 +164,12 @@ class CarMakeController extends Controller
      *         @OA\JsonContent(example="")
      *     )
      * )
-     * @param CarMake $carMake
+     * @param Car $car
      * @return JsonResponse
      */
-    public function destroy(CarMake $carmake): JsonResponse
+    public function destroy(Car $car): JsonResponse
     {
-        $carmake->delete();
+        $car->delete();
         return response()->json([], Response::HTTP_NO_CONTENT);
     }
 }

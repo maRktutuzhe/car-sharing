@@ -4,8 +4,9 @@ namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 
-use App\Models\CarMake;
+use App\Models\Car;
 use App\Models\User;
+use Database\Seeders\CarMakesSeeder;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -15,7 +16,9 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
+        $this->call(CarMakesSeeder::class);
+
         User::factory(10)->create();
-        CarMake::factory(10)->create();
+        Car::factory(10)->create();
     }
 }
