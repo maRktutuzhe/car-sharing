@@ -1,6 +1,6 @@
-<mxfile host="app.diagrams.net" modified="2024-03-14T05:25:24.238Z" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/122.0.0.0 Safari/537.36" etag="NGwLZvpyP1j8gxGJTkJF" version="24.0.5" type="device">
+<mxfile host="app.diagrams.net" modified="2024-03-14T11:31:09.099Z" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/122.0.0.0 Safari/537.36" etag="UiInGSz8CkvFCnM0n_AI" version="24.0.6" type="device">
   <diagram name="Страница — 1" id="WXmpkiO_l2FCkSClakdp">
-    <mxGraphModel dx="1440" dy="1777" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+    <mxGraphModel dx="2117" dy="1726" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
@@ -143,7 +143,7 @@
           <mxGeometry y="210" width="140" height="30" as="geometry" />
         </mxCell>
         <mxCell id="qoNsLPlohUqsEQr8uXkR-55" value="Администратор" style="swimlane;fontStyle=0;childLayout=stackLayout;horizontal=1;startSize=30;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
-          <mxGeometry x="520" y="370" width="140" height="240" as="geometry" />
+          <mxGeometry x="610" y="380" width="140" height="240" as="geometry" />
         </mxCell>
         <mxCell id="qoNsLPlohUqsEQr8uXkR-56" value="имя" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;rotatable=0;whiteSpace=wrap;html=1;" parent="qoNsLPlohUqsEQr8uXkR-55" vertex="1">
           <mxGeometry y="30" width="140" height="30" as="geometry" />
@@ -163,7 +163,7 @@
         <mxCell id="qoNsLPlohUqsEQr8uXkR-61" value="номер" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;rotatable=0;whiteSpace=wrap;html=1;" parent="qoNsLPlohUqsEQr8uXkR-55" vertex="1">
           <mxGeometry y="180" width="140" height="30" as="geometry" />
         </mxCell>
-        <mxCell id="BGwEm-sczqbTrD4D2sLC-1" value="дата рождения" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;rotatable=0;whiteSpace=wrap;html=1;" vertex="1" parent="qoNsLPlohUqsEQr8uXkR-55">
+        <mxCell id="BGwEm-sczqbTrD4D2sLC-1" value="дата рождения" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;rotatable=0;whiteSpace=wrap;html=1;" parent="qoNsLPlohUqsEQr8uXkR-55" vertex="1">
           <mxGeometry y="210" width="140" height="30" as="geometry" />
         </mxCell>
         <mxCell id="qoNsLPlohUqsEQr8uXkR-64" value="Карта" style="swimlane;fontStyle=0;childLayout=stackLayout;horizontal=1;startSize=30;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
@@ -228,6 +228,9 @@
               <mxPoint x="310" y="319" />
             </Array>
           </mxGeometry>
+        </mxCell>
+        <mxCell id="PojuZKNoi7lz_E8OX1MI-1" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="qoNsLPlohUqsEQr8uXkR-49" target="qoNsLPlohUqsEQr8uXkR-41">
+          <mxGeometry relative="1" as="geometry" />
         </mxCell>
       </root>
     </mxGraphModel>
