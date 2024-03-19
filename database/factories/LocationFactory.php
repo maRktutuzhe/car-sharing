@@ -2,7 +2,10 @@
 
 namespace Database\Factories;
 
+use App\Models\Car;
 use Illuminate\Database\Eloquent\Factories\Factory;
+use Illuminate\Support\Facades\DB;
+
 
 /**
  * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Location>
@@ -16,8 +19,13 @@ class LocationFactory extends Factory
      */
     public function definition(): array
     {
+          // Генерация случайных координат
+        $latitude = fake()->latitude(51, 52);
+        $longitude = fake()->longitude(54, 56);
+
         return [
-            //
+            'car_id' => Car::inRandomOrder()->first(),
+            'coordinates' => DB::raw("ST_GeomFromText('POINT($longitude $latitude)')"),
         ];
     }
 }

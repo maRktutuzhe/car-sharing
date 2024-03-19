@@ -5,6 +5,7 @@ namespace Database\Seeders;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 
 use App\Models\Car;
+use App\Models\Location;
 use App\Models\Price;
 use App\Models\User;
 use Database\Seeders\CarMakesSeeder;
@@ -19,8 +20,10 @@ class DatabaseSeeder extends Seeder
     {
         $this->call(CarMakesSeeder::class);
 
+        User::factory()->create(['email' => 'mb89510335133@gmail.com']);
         User::factory(10)->create();
         Car::factory(10)->create();
         Price::factory(5)->create();
+        Location::factory(5)->create();
     }
 }

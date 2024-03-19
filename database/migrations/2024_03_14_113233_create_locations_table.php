@@ -15,11 +15,9 @@ return new class extends Migration
     Schema::create('locations', function (Blueprint $table) {
         $table->uuid('id')->primary();
         $table->foreignUuid('car_id');
-        $table->point('coordinates')->nullable();
-        // $table->geography('coordinates', subtype: 'point', srid: 4326);
+        $table->point('coordinates');
         $table->timestamps();
     });
-    // DB::statement('ALTER TABLE locations ADD COLUMN coordinates_geog geography(Point, 4326)');
 }
 
 
