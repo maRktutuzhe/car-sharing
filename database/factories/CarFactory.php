@@ -24,6 +24,7 @@ class CarFactory extends Factory
             'carmake_id' => CarMake::inRandomOrder()->first(),
             'color' => fake()->colorName(),
             'status' => fake()->randomElement(['в аренде', 'свободна', 'недоступна']),
+            'password' => Hash::make('carPassword'),
         ];
     }
 }

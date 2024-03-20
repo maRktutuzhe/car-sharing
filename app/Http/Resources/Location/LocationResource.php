@@ -2,9 +2,9 @@
 
 namespace App\Http\Resources\Location;
 
+use App\Models\Location;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
-use Illuminate\Support\Facades\DB;
 
 class LocationResource extends JsonResource
 {
@@ -18,11 +18,13 @@ class LocationResource extends JsonResource
      */
     public function toArray(Request $request): array
     {
+        $location = Location::withCoordinates($this->resource->id)->first();
+        $coordinates = json_decode($location->coordinates, true)['coordinates'];
 
         $response = [
             'id' => $this->resource->id,
             'car_id' => $this->resource->car_id,
-            'coordinates' => $this->resource->coordinates,
+            'coordinates' => $coordinates,
             'date_time' => $this->resource->updated_at,
         ];
 

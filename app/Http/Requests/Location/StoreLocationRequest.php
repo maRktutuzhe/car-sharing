@@ -33,7 +33,9 @@ class StoreLocationRequest extends FormRequest
     {
         return [
             'car_id' => 'required|uuid|exists:cars,id',
-            'coordinates' => 'required|string|max:255',
+            'coordinates' => 'required',
+            'coordinates.latitude' => 'required|numeric|min:51|max:52',
+            'coordinates.longitude' => 'required|numeric|min:54|max:56',
         ];
     }
 }

@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\DB;
 
 /**
  * Модель марки машины
@@ -29,4 +30,11 @@ class Location extends Model
         'car_id',
         'coordinates',
     ];
+
+    public function scopeWithCoordinates($query, $id)
+    {
+        return $query
+            ->addSelect(DB::raw('ST_AsGeoJSON(coordinates) as coordinates'))
+            ->where('id', $id);
+    }
 }

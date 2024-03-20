@@ -13,10 +13,7 @@ return new class extends Migration
     {
         Schema::create('cars', function (Blueprint $table) {
             $table->uuid('id')->primary();
-            $table->foreignId('carmake_id')->constrained(
-                table: 'car_makes', indexName: 'id'
-            );
-            // $table->foreign('carmake_id')->constrained()->on('car_makes')->comment('id модели');
+            $table->foreignId('carmake_id')->constrained()->on('car_makes')->comment('id модели');
             $table->string('name')->comment('название марки');
             $table->string('number')->comment('номер');
             $table->string('color')->comment('цвет');
@@ -24,6 +21,7 @@ return new class extends Migration
             $table->json('damages')->nullable()->comment('повреждения');
             $table->string('STS')->nullable()->comment('СТС');
             $table->string('PTS')->nullable()->comment('ПТС');
+            $table->string('password')->comment('Пароль');
             $table->timestamps();
             $table->softDeletes();
         });

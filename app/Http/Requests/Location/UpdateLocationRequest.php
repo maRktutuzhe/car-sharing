@@ -33,7 +33,9 @@ class UpdateLocationRequest extends FormRequest
     {
         return [
             'car_id' => 'filled|uuid|exists:cars,id',
-            'coordinates' => 'filled|string|max:255',
+            'coordinates' => 'filled',
+            'coordinates.latitude' => 'filled|numeric|min:51|max:52',
+            'coordinates.longitude' => 'filled|numeric|min:54|max:56',
         ];
     }
 }
