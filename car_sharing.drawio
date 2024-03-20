@@ -1,4 +1,4 @@
-<mxfile host="app.diagrams.net" modified="2024-03-14T11:31:09.099Z" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/122.0.0.0 Safari/537.36" etag="UiInGSz8CkvFCnM0n_AI" version="24.0.6" type="device">
+<mxfile host="app.diagrams.net" modified="2024-03-20T13:18:43.599Z" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/122.0.0.0 Safari/537.36" etag="g8dWECuAM_FR8hG-QJkF" version="24.0.7" type="device">
   <diagram name="Страница — 1" id="WXmpkiO_l2FCkSClakdp">
     <mxGraphModel dx="2117" dy="1726" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
       <root>
@@ -229,7 +229,7 @@
             </Array>
           </mxGeometry>
         </mxCell>
-        <mxCell id="PojuZKNoi7lz_E8OX1MI-1" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="qoNsLPlohUqsEQr8uXkR-49" target="qoNsLPlohUqsEQr8uXkR-41">
+        <mxCell id="PojuZKNoi7lz_E8OX1MI-1" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" parent="1" source="qoNsLPlohUqsEQr8uXkR-49" target="qoNsLPlohUqsEQr8uXkR-41" edge="1">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
       </root>

@@ -32,8 +32,8 @@ class User extends Authenticatable implements JWTSubject
     use HasFactory;
     use SoftDeletes;
     use HasUuids;
-
-     /**
+     
+    /**
      * The attributes that are mass assignable.
      *
      * @var array<int, string>
