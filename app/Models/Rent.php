@@ -6,6 +6,7 @@ use App\Enums\Event;
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 
 /**
  * Модель Аренды
@@ -42,4 +43,20 @@ class Rent extends Model
     protected $enumCasts = [
         'event' => Event::class,
     ];
+
+    /**
+     * Get the user
+     */
+    public function user(): HasOne
+    {
+        return $this->hasOne(User::class);
+    }
+
+    /**
+     * Get the car
+     */
+    public function car(): HasOne
+    {
+        return $this->hasOne(Car::class);
+    }
 }

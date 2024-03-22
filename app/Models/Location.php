@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Support\Facades\DB;
 
 /**
@@ -36,5 +37,13 @@ class Location extends Model
         return $query
             ->addSelect(DB::raw('ST_AsGeoJSON(coordinates) as coordinates'))
             ->where('id', $id);
+    }
+
+    /**
+     * Get the Car
+     */
+    public function car(): BelongsTo
+    {
+        return $this->belongsTo(Car::class);
     }
 }

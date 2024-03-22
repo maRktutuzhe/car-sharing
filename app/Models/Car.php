@@ -6,6 +6,8 @@ use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 /**
@@ -53,5 +55,29 @@ class Car extends Model
     public function carMake(): BelongsTo
     {
         return $this->belongsTo(CarMake::class);
+    }
+    
+    /**
+     * Get the price
+     */
+    public function price(): HasOne
+    {
+        return $this->hasOne(Price::class);
+    }
+
+    /**
+     * Get the locations
+     */
+    public function locations(): HasMany
+    {
+        return $this->hasMany(Location::class);
+    }
+    
+    /**
+     * Get the rents
+     */
+    public function rents(): HasMany
+    {
+        return $this->hasMany(Rent::class);
     }
 }
