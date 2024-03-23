@@ -76,6 +76,14 @@ class Car extends Model
     {
         return $this->hasOne(Price::class);
     }
+ 
+    /**
+     * Get the state
+     */
+    public function state(): HasOne
+    {
+        return $this->hasOne(State::class);
+    }
 
     /**
      * Get the locations

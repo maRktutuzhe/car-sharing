@@ -21,7 +21,7 @@ class StateResource extends JsonResource
             'id' => $this->resource->id,
             'car_id' => $this->resource->car_id,
             'doors' => $this->resource->doors,
-            'engine' => $this->resource->enjine,
+            'engine' => $this->resource->engine,
             'block' => $this->resource->block,
         ];
 

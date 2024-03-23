@@ -17,7 +17,9 @@ class StateFactory extends Factory
     public function definition(): array
     {
         return [
-            //
+            'doors' => true,
+            'engine' => true,
+            'block' => true,
         ];
     }
 }
