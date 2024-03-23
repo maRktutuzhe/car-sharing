@@ -39,8 +39,8 @@ class StoreRentRequest extends FormRequest
             'user_id' => 'required|uuid|exists:users,id',
             'car_id' => 'required|uuid|exists:cars,id',
             'event' => 'required|string|max:255',
+            'location_id' => 'nullable|string',
             'petrol' => 'required|numeric',
-            'location_id' => 'required|uuid|exists:locations,id',
             'kilometer' => 'required|numeric',
         ];
     }
