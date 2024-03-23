@@ -2,11 +2,21 @@
 
 namespace App\Http\Controllers;
 
+use App\Exceptions\InvalidCarStatusException;
+use App\Exceptions\InvalidRentEndingException;
+use App\Exceptions\InvalidUserBalanceException;
+use App\Exceptions\InvalidUserRentException;
+use App\Exceptions\InvalidUserStatusException;
 use App\Http\Requests\Rent\StoreRentRequest;
 use App\Http\Requests\Rent\UpdateRentRequest;
 use App\Http\Resources\Rent\RentResource;
 use App\Http\Resources\Rent\RentResourceCollection;
+use App\Http\Resources\User\UserResource;
+use App\Models\Car;
+use App\Models\Location;
 use App\Models\Rent;
+use App\Models\User;
+use App\Services\Rents\RentService;
 use Illuminate\Http\Response;
 use Symfony\Component\HttpFoundation\JsonResponse;
 
@@ -62,14 +72,32 @@ class RentController extends Controller
      *     @OA\Response(response="422", description="Возвращает ошибки валидации")
      * )
      * @param StoreRentRequest $request
-     * @return RentResource
+     * @return RentResource|string
      */
-    public function store(StoreRentRequest $request): RentResource
+    public function store(StoreRentRequest $request): RentResource|string
     {
-        $data = $request->validated();
-        $rent = Rent::query()->create($data);
+        $service = new RentService();
+        
+        try {
+            $rent = $service->check($request);
+            
+            return new RentResource($rent);
+        } catch (InvalidUserStatusException $e) {
 
-        return new RentResource($rent);
+            return $e->getMessage();
+        } catch (InvalidUserBalanceException $e) {
+
+            return $e->getMessage();
+        } catch (InvalidCarStatusException $e) {
+
+            return $e->getMessage();
+        } catch (InvalidUserRentException $e) {
+
+            return $e->getMessage();
+        } catch (InvalidRentEndingException $e) {
+
+            return $e->getMessage();
+        }
     }
 
     /**

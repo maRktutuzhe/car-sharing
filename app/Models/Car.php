@@ -26,6 +26,9 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * @property string $created_at
  * @property string $updated_at
  * @property string $deleted_at
+ * 
+ * @method locations
+ * @method fullName
  */
 class Car extends Model
 {
@@ -50,11 +53,20 @@ class Car extends Model
     ];
 
     /**
+     * Get the full name
+     */
+    public function fullName(): string
+    {
+        return $this->color . ' ' . $this->carMake->name . ' ' . $this->name . ' ' . $this->number;
+    }
+
+
+    /**
      * Get the Car Make
      */
     public function carMake(): BelongsTo
     {
-        return $this->belongsTo(CarMake::class);
+        return $this->belongsTo(CarMake::class, 'carmake_id');
     }
     
     /**

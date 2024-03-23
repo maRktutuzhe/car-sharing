@@ -44,6 +44,8 @@ class Rent extends Model
         'event' => Event::class,
     ];
 
+    
+
     /**
      * Get the user
      */

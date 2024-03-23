@@ -6,6 +6,7 @@ use App\Enums\UserStatus;
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 use Tymon\JWTAuth\Contracts\JWTSubject;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -15,14 +16,17 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  *
  * @package App\Models\User
  * @property string $id
- * @property string $organization_id
  * @property string $first_name
  * @property string $middle_name
  * @property string $last_name
  * @property string $email
  * @property string $phone_number
- * @property string $city
  * @property string $password
+ * @property string $city
+ * @property string $passport
+ * @property string $licence
+ * @property string $status
+ * @property string $balance
  * @property string $created_at
  * @property string $updated_at
  * @property string $deleted_at
@@ -93,4 +97,11 @@ class User extends Authenticatable implements JWTSubject
         return $this->hasMany(Rent::class);
     }
 
+    /**
+     * Get the user's latest rent.
+     */
+    public function latestRent(): HasOne
+    {
+        return $this->hasOne(Rent::class)->latest();
+    }
 }
