@@ -20,7 +20,7 @@ class UserFactory extends Factory
     public function definition(): array
     {
         $statusValues = UserStatus::values();
-        $randomStatus = $statusValues[array_rand($statusValues)];
+        $randomStatus = array_rand($statusValues);
 
         return [
             'first_name' => fake()->firstName(),
