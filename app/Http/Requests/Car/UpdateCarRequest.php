@@ -42,7 +42,7 @@ class UpdateCarRequest extends FormRequest
             'name' => 'filled|string|max:255',
             'number' => 'filled|string|max:255',
             'color' => 'filled|string|max:255',
-            'status' => 'filled|string|max:255',
+            'status' => 'filled|enum:CarStatus::class',
             'damages' => 'nullable',
             'STS' => 'nullable|string|max:255',
             'PTS' => 'nullable|string|max:255',

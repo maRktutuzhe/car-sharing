@@ -42,7 +42,7 @@ class StoreCarRequest extends FormRequest
             'name' => 'required|string|max:255',
             'number' => 'required|string|max:255',
             'color' => 'required|string|max:255',
-            'status' => 'required|string|max:255',
+            'status' => 'required|enum:CarStatus::class',
             'damages' => 'nullable',
             'STS' => 'nullable|string|max:255',
             'PTS' => 'nullable|string|max:255',

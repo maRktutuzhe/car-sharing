@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Enums\CarStatus;
 use App\Models\CarMake;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Facades\Hash;
@@ -18,12 +19,15 @@ class CarFactory extends Factory
      */
     public function definition(): array
     {
+        $statusValues = CarStatus::values();
+        $randomStatus = array_rand($statusValues);
+
         return [
             'name' => fake()->word(),
             'number' => fake()->regexify('[A-Z]{1}[0-9]{3}[A-Z]{2}[0-9]{2}'),
             'carmake_id' => CarMake::inRandomOrder()->first(),
             'color' => fake()->colorName(),
-            'status' => fake()->randomElement(['в аренде', 'свободна', 'недоступна']),
+            'status' => $randomStatus,
             'password' => Hash::make('carPassword'),
         ];
     }
