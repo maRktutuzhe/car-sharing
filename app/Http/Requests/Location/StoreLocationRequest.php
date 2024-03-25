@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests\Location;
 
+use App\Casts\GeoJson;
 use Illuminate\Foundation\Http\FormRequest;
 
 /**

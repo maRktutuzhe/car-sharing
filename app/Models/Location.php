@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Casts\GeoJson;
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -31,6 +32,18 @@ class Location extends Model
         'car_id',
         'coordinates',
     ];
+    
+    /**
+     * Get the attributes that should be cast.
+     *
+     * @return array<string, string>
+     */
+    protected function casts(): array
+    {
+        return [
+            'coordinates' => GeoJson::class,
+        ];
+    }
 
     public function scopeWithCoordinates($query, $id)
     {

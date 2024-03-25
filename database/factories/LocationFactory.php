@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Casts\GeoJson;
 use App\Models\Car;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Facades\DB;
@@ -19,13 +20,14 @@ class LocationFactory extends Factory
      */
     public function definition(): array
     {
-        //   // Генерация случайных координат
+        // Генерация случайных координат
         $latitude = fake()->latitude(51, 52);
         $longitude = fake()->longitude(54, 56);
-        
+        $geoJson = new GeoJson();
+        $coordinates = $geoJson->set(null, null, "$latitude $longitude", null);
         return [
             'car_id' => Car::inRandomOrder()->first(),
-            'coordinates' => DB::raw("ST_GeomFromText('POINT($latitude $longitude)', 4326)"),
+            'coordinates' =>  $coordinates
         ];
     }
 }

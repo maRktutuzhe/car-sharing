@@ -7,8 +7,8 @@ use App\Http\Requests\Location\UpdateLocationRequest;
 use App\Http\Resources\Location\LocationResource;
 use App\Http\Resources\Location\LocationResourceCollection;
 use App\Models\Location;
+use App\Services\Locations\LocationService;
 use Illuminate\Http\Response;
-use Illuminate\Support\Facades\Http;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use GuzzleHttp\Client;
 use Illuminate\Support\Facades\DB;
@@ -70,13 +70,8 @@ class LocationController extends Controller
      */
     public function store(StoreLocationRequest $request)
     {
-        $data = $request->validated();
-
-        $latitude = $data['coordinates']['latitude'];
-        $longitude = $data['coordinates']['longitude'];
-        $data['coordinates']= DB::raw("ST_GeomFromText('POINT($latitude $longitude)', 4326)");
-
-        $location = Location::query()->create($data);
+        $service = new LocationService();
+        $location = $service->storeLocation($request);
         
         return new LocationResource($location);
     }
@@ -110,27 +105,27 @@ class LocationController extends Controller
     public function show(Location $location): LocationResource
     {
         return new LocationResource($location);
-        $coordinates = Location::selectRaw('ST_X(coordinates::geometry) AS longitude, ST_Y(coordinates::geometry) AS latitude')->get();
-        // return $coordinates;
-        $latitude = 51.834436;
-        $longitude = 55.160602;
+
+        //  Превращение координат в адрес
+        // $latitude = 51.834436;
+        // $longitude = 55.160602;
         
-        $url = 'https://nominatim.openstreetmap.org/reverse?lat=' . $latitude . '&lon=' . $longitude . '&format=json';
+        // $url = 'https://nominatim.openstreetmap.org/reverse?lat=' . $latitude . '&lon=' . $longitude . '&format=json';
         
-        $client = new Client();
-        $response = $client->request('GET', $url);
+        // $client = new Client();
+        // $response = $client->request('GET', $url);
         
-        if ($response->getStatusCode() == 200) {
-            $data = json_decode($response->getBody(), true);
-            if (!empty($data)) {
-                $address = $data['display_name'];
-                return ($address);
-            } else {
-                return ("Адрес не найден");
-            }
-        } else {
-            return ("Ошибка при выполнении запроса");
-        }
+        // if ($response->getStatusCode() == 200) {
+        //     $data = json_decode($response->getBody(), true);
+        //     if (!empty($data)) {
+        //         $address = $data['display_name'];
+        //         return ($address);
+        //     } else {
+        //         return ("Адрес не найден");
+        //     }
+        // } else {
+        //     return ("Ошибка при выполнении запроса");
+        // }
 
     }
 
@@ -167,13 +162,8 @@ class LocationController extends Controller
      */
     public function update(UpdateLocationRequest $request, Location $location): LocationResource
     {
-        $data = $request->validated();
-        
-        $latitude = $data['coordinates']['latitude'];
-        $longitude = $data['coordinates']['longitude'];
-        $data['coordinates']= DB::raw("ST_GeomFromText('POINT($latitude $longitude)', 4326)");
-        
-        $location->update($data);
+        $service = new LocationService();
+        $location = $service->updateLocation($request, $location);
 
         return new LocationResource($location);
     }

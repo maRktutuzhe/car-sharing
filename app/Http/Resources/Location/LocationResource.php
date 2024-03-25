@@ -2,9 +2,11 @@
 
 namespace App\Http\Resources\Location;
 
+use App\Casts\GeoJson;
 use App\Models\Location;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
+use Illuminate\Support\Facades\DB;
 
 class LocationResource extends JsonResource
 {
@@ -16,10 +18,12 @@ class LocationResource extends JsonResource
      * @param Request $request
      * @return array<string, mixed>
      */
+    
+    // $coordinates = json_decode($c, true);
     public function toArray(Request $request): array
     {
-        $location = Location::withCoordinates($this->resource->id)->first();
-        $coordinates = json_decode($location->coordinates, true)['coordinates'];
+        $geoJson = new GeoJson();
+        $coordinates = $geoJson->get(null, null, $this->resource->id, null);
 
         $response = [
             'id' => $this->resource->id,
