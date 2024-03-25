@@ -25,7 +25,7 @@ class RentService
      * @throws InvalidUserStatusException
      * @return Rent
      */
-    public function check(StoreRentRequest $data): Rent
+    public function check(StoreRentRequest $data)
     {
         $user = User::find($data->user_id);
 
@@ -69,7 +69,7 @@ class RentService
         $user = User::find($data->user_id);
         $car = Car::find($data->car_id);
 
-        if ($car->status != 'свободна') {
+        if ($car->status != 'free') {
             throw new InvalidCarStatusException;
         }
 
@@ -94,7 +94,7 @@ class RentService
         $user = User::find($data->user_id);
         $car = Car::find($data->car_id);
 
-        if ($car->status != 'в аренде') {
+        if ($car->status != 'free') {
             throw new InvalidCarStatusException;
         }
 
@@ -115,10 +115,9 @@ class RentService
     private function createRent(StoreRentRequest $data): Rent
     {
         $car = Car::find($data->car_id);
-        // $data->location_id = $car->locations->last()->id;        //почему не работает
         $data = $data->validated();
-        $data['location_id'] = $car->locations->last()->id;         //работает
-        return Rent::query()->create($data);;
+        $data['location_id'] = $car->locations->last()->id;
+        return Rent::query()->create($data);
     }
 
 }
