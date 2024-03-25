@@ -31,6 +31,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * @property string $updated_at
  * @property string $deleted_at
  * @method string fullName()
+ * @method latestRent()
  */
 class User extends Authenticatable implements JWTSubject
 {

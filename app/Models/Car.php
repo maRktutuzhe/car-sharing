@@ -27,8 +27,8 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * @property string $updated_at
  * @property string $deleted_at
  * 
- * @method locations
- * @method fullName
+ * @method locations()
+ * @method fullName()
  */
 class Car extends Model
 {

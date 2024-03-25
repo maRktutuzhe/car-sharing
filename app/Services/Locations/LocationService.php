@@ -24,7 +24,7 @@ class LocationService
         $longitude = $data['coordinates']['longitude'];
         
         $geoJson = new GeoJson();
-        $coordinates = $geoJson->set(null, null, "$latitude $longitude", null);
+        $coordinates = $geoJson->set(null, null, "$latitude $longitude", []);
 
         $data['coordinates'] = $coordinates;
 
@@ -49,7 +49,7 @@ class LocationService
             $longitude = $data['coordinates']['longitude'];
             
             $geoJson = new GeoJson();
-            $coordinates = $geoJson->set(null, null, "$latitude $longitude", null);
+            $coordinates = $geoJson->set(null, null, "$latitude $longitude", []);
             
             $data['coordinates'] = $coordinates;
         }

@@ -4,7 +4,6 @@ namespace App\Casts;
 
 use App\Models\Location;
 use Illuminate\Contracts\Database\Eloquent\CastsAttributes;
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\DB;
 
 class GeoJson implements CastsAttributes
