@@ -12,13 +12,13 @@ class LocationService
     /**
      * Создание локации
      * 
-     * @param StoreLocationRequest $data
+     * @param StoreLocationRequest $request
      * @return Location
      */
-    public function storeLocation (StoreLocationRequest $data): Location
+    public function storeLocation (StoreLocationRequest $request): Location
     {
         
-        $data = $data->validated();
+        $data = $request->validated();
 
         $latitude = $data['coordinates']['latitude'];
         $longitude = $data['coordinates']['longitude'];
@@ -36,13 +36,13 @@ class LocationService
     /**
      * изменение локации
      * 
-     * @param UpdateLocationRequest $data
+     * @param UpdateLocationRequest $request
      * @return Location
      */
-    public function updateLocation (UpdateLocationRequest $data, Location $location): Location
+    public function updateLocation (UpdateLocationRequest $request, Location $location): Location
     {
         
-        $data = $data->validated();
+        $data = $request->validated();
 
         if (isset($data['coordinates'])) {
             $latitude = $data['coordinates']['latitude'];

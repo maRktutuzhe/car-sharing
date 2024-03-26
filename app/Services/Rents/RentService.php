@@ -17,7 +17,7 @@ class RentService
     /**
      * Проверка данных для аренды
      * 
-     * @param StoreRentRequest $data
+     * @param StoreRentRequest $request
      * @throws InvalidCarStatusException
      * @throws InvalidRentEndingException
      * @throws InvalidUserBalanceException
@@ -25,18 +25,18 @@ class RentService
      * @throws InvalidUserStatusException
      * @return Rent
      */
-    public function check(StoreRentRequest $data)
+    public function check(StoreRentRequest $request): Rent
     {
-        $user = User::find($data->user_id);
+        $user = User::find($request->user_id);
 
         if ($user->status == 'active') {
             if ($user->balance < 150000) {
                 throw new InvalidUserBalanceException($user->balance);
             }
-            return $this->checkCar($data);
+            return $this->checkCar($request);
         }
         if ($user->status == 'premium') {
-            return $this->checkCar($data);
+            return $this->checkCar($request);
         };
         
         throw new InvalidUserStatusException($user->status);
@@ -45,29 +45,29 @@ class RentService
     /**
      * Проверка события аренды
      * 
-     * @param StoreRentRequest $data
+     * @param StoreRentRequest $request
      * @throws InvalidCarStatusException
      * @throws InvalidRentEndingException
      * @throws InvalidUserRentException
      * @return Rent
      */
-    private function checkCar($data): Rent
+    private function checkCar($request): Rent
     {
-        return ($data->event == 'start')? $this->checkStartEvent($data) : $this->checkEndEvent($data);
+        return ($request->event == 'start')? $this->checkStartEvent($request) : $this->checkEndEvent($request);
     }
 
     /**
      * Проверка для начала аренды
      * 
-     * @param StoreRentRequest $data
+     * @param StoreRentRequest $request
      * @throws InvalidCarStatusException
      * @throws InvalidUserRentException
      * @return Rent
      */
-    private function checkStartEvent($data): Rent
+    private function checkStartEvent(StoreRentRequest $request): Rent
     {
-        $user = User::find($data->user_id);
-        $car = Car::find($data->car_id);
+        $user = User::find($request->user_id);
+        $car = Car::find($request->car_id);
 
         if ($car->status != 'free') {
             throw new InvalidCarStatusException;
@@ -78,21 +78,21 @@ class RentService
                 throw new InvalidUserRentException($car);
             }
         }
-        return $this->createRent($data);
+        return $this->createRent($request);
     }
 
     /**
      * Проверка для завершения аренды
      * 
-     * @param StoreRentRequest $data
+     * @param StoreRentRequest $request
      * @throws InvalidCarStatusException
      * @throws InvalidRentEndingException
      * @return Rent
      */
-    private function checkEndEvent($data): Rent
+    private function checkEndEvent(StoreRentRequest $request): Rent
     {
-        $user = User::find($data->user_id);
-        $car = Car::find($data->car_id);
+        $user = User::find($request->user_id);
+        $car = Car::find($request->car_id);
 
         if ($car->status != 'free') {
             throw new InvalidCarStatusException;
@@ -100,7 +100,7 @@ class RentService
 
         if ($lastRent = $user->latestRent) {
             if ($lastRent->event == 'start' && $lastRent->car == $car) {
-                return $this->createRent($data);
+                return $this->createRent($request);
             }
         }
         throw new InvalidRentEndingException($car);
@@ -109,13 +109,13 @@ class RentService
     /**
      * Создание записи аренды
      * 
-     * @param StoreRentRequest $data
+     * @param StoreRentRequest $request
      * @return Rent
      */
-    private function createRent(StoreRentRequest $data): Rent
+    private function createRent(StoreRentRequest $request): Rent
     {
-        $car = Car::find($data->car_id);
-        $data = $data->validated();
+        $car = Car::find($request->car_id);
+        $data = $request->validated();
         $data['location_id'] = $car->locations->last()->id;
         return Rent::query()->create($data);
     }
