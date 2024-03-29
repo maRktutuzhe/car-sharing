@@ -2,6 +2,8 @@
 
 namespace App\Models;
 
+use App\Enums\CarStatus;
+use App\Events\CarCreated;
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -50,6 +52,24 @@ class Car extends Model
         'damages',
         'STS',
         'PTS',
+    ];
+
+    /**
+     * Get the attributes that should be cast.
+     *
+     * @return array<string, string>
+     */
+    protected function casts(): array
+    {
+        return [
+            'status' => CarStatus::class,
+        ];
+    }
+
+
+
+    protected $dispatchesEvents = [
+        'created' => CarCreated::class,
     ];
 
     /**

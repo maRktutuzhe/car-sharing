@@ -21,7 +21,6 @@ return new class extends Migration
             $table->json('damages')->nullable()->comment('повреждения');
             $table->string('STS')->nullable()->comment('СТС');
             $table->string('PTS')->nullable()->comment('ПТС');
-            $table->string('password')->comment('Пароль');
             $table->timestamps();
             $table->softDeletes();
         });

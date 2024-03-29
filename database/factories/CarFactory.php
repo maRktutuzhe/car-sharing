@@ -28,7 +28,6 @@ class CarFactory extends Factory
             'carmake_id' => CarMake::inRandomOrder()->first(),
             'color' => fake()->colorName(),
             'status' => $randomStatus,
-            'password' => Hash::make('carPassword'),
         ];
     }
 }
