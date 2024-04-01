@@ -7,6 +7,7 @@ use App\Http\Requests\State\UpdateStateRequest;
 use App\Http\Resources\State\StateResource;
 use App\Http\Resources\State\StateResourceCollection;
 use App\Models\State;
+use App\Services\States\StateService;
 use Illuminate\Http\Response;
 use Symfony\Component\HttpFoundation\JsonResponse;
 

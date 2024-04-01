@@ -14,12 +14,14 @@ class CarCreated
 {
     use Dispatchable, InteractsWithSockets, SerializesModels;
 
+    public $id;
+
     /**
      * Create a new event instance.
      */
-    public function __construct()
+    public function __construct($id)
     {
-        //
+        $this->id = $id;
     }
 
     /**
