@@ -2,7 +2,9 @@
 
 namespace App\Http\Requests\User;
 
+use App\Enums\UserStatus;
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
 /**
  * User Stroe Request Validation
@@ -38,6 +40,9 @@ class StoreUserRequest extends FormRequest
      */
     public function rules(): array
     {
+        $this->merge([
+            'balance' => $this->input('balance', 0),
+        ]);
         return [
             'first_name' => 'required|string|max:255',
             'middle_name' => 'required|string|max:255',
@@ -48,7 +53,7 @@ class StoreUserRequest extends FormRequest
             'city' => 'nullable|string',
             'passport' => 'nullable|string',
             'licence' => 'nullable|string',
-            'status' => 'required|string|enum:UserStatus::class',
+            'status' => ['required', 'string', Rule::in(UserStatus::Values())],
             'balance' => 'required|integer',
         ];
     }

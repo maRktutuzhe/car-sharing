@@ -2,7 +2,9 @@
 
 namespace App\Http\Requests\User;
 
+use App\Enums\UserStatus;
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
 /**
  * User Update Request Validation
@@ -48,7 +50,7 @@ class UpdateUserRequest extends FormRequest
             'city' => 'nullable|string',
             'passport' => 'nullable|string',
             'licence' => 'nullable|string',
-            'status' => 'filled|string|enum:UserStatus::class',
+            'status' => ['filled', 'string', Rule::in(UserStatus::Values())],
             'balance' => 'filled|integer',
         ];
     }

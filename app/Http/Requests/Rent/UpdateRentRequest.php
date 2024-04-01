@@ -2,7 +2,9 @@
 
 namespace App\Http\Requests\Rent;
 
+use App\Enums\Event;
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
 /**
  * Rent Update RequestValidation
@@ -38,7 +40,7 @@ class UpdateRentRequest extends FormRequest
         return [
             'user_id' => 'filled|uuid|exists:users,id',
             'car_id' => 'filled|uuid|exists:cars,id',
-            'event' => 'filled|string|max:255',
+            'event' => ['required', 'string', Rule::in(Event::Values())],
             'petrol' => 'filled|numeric',
             'location_id' => 'filled|uuid|exists:locations,id',
             'kilometer' => 'filled|numeric',

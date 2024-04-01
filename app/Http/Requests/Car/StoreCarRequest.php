@@ -2,7 +2,9 @@
 
 namespace App\Http\Requests\Car;
 
+use App\Enums\CarStatus;
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
 /**
  * Car Store RequestValidation
@@ -42,7 +44,7 @@ class StoreCarRequest extends FormRequest
             'name' => 'required|string|max:255',
             'number' => 'required|string|max:255',
             'color' => 'required|string|max:255',
-            'status' => 'required|enum:CarStatus::class',
+            'status' => ['required', 'string', Rule::in(CarStatus::Values())],
             'damages' => 'nullable',
             'STS' => 'nullable|string|max:255',
             'PTS' => 'nullable|string|max:255',

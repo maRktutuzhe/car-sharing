@@ -2,7 +2,9 @@
 
 namespace App\Http\Requests\Rent;
 
+use App\Enums\Event;
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
 /**
  * Rent Store RequestValidation
@@ -38,7 +40,7 @@ class StoreRentRequest extends FormRequest
         return [
             'user_id' => 'required|uuid|exists:users,id',
             'car_id' => 'required|uuid|exists:cars,id',
-            'event' => 'required|string|max:255',
+            'event' => ['required', 'string', Rule::in(Event::Values())],
             'location_id' => 'nullable|string',
             'petrol' => 'required|numeric',
             'kilometer' => 'required|numeric',
