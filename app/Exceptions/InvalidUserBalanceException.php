@@ -13,7 +13,7 @@ class InvalidUserBalanceException extends Exception
      */
     public function __construct($balance)
     {
-        $rub = $balance / 100;
+        $rub = floor($balance / 100);
         $cop = $balance % 100;
         $message = '10';
         if ($balance < 0) {
