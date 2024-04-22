@@ -6,6 +6,7 @@ use App\Http\Requests\Car\StoreCarRequest;
 use App\Http\Requests\Car\UpdateCarRequest;
 use App\Http\Resources\Car\CarResource;
 use App\Http\Resources\Car\CarResourceCollection;
+use App\Http\Resources\Location\LocationResource;
 use App\Models\Car;
 use Illuminate\Http\Response;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -171,5 +172,34 @@ class CarController extends Controller
     {
         $car->delete();
         return response()->json([], Response::HTTP_NO_CONTENT);
+    }
+
+    public function showFree()
+    {
+
+        // TODO: ДЕЛАТЬ ЧЕРЕРЗ ИНДЕКС, ИСПОЛЬЗОВАТЬ ФИЛЬТРЫ И ИНКЛЮДИСЫ, А ЭТО УДАЛИТЬ
+
+
+        $carsData = [];
+        // $cars = Car::where('status', 'free')->get();
+        $cars = Car::Where('status', 'free')->with([
+            'locations',
+        ])->get();
+        return $cars;
+        return  CarResource::collection($cars);
+        foreach ($cars as $car) {
+            $location =  $car->locations->last();
+            $res = new LocationResource($location);
+            $carData = [
+                'carMake' => $car->carMake->name,
+                'name' => $car->name,
+                'number' => $car->number,
+                'color' => $car->color,
+                'damages' => $car->damages,
+                'location' => $res
+            ];
+            $carsData[] = $carData;
+        }
+        return $carsData;
     }
 }

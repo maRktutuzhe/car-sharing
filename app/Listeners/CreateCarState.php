@@ -29,6 +29,6 @@ class CreateCarState
             'block' => true,
         ];
         $state = State::query()->create($states);
-        echo( $state->doors);
+        // echo( $state->doors);
     }
 }

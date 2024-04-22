@@ -38,3 +38,5 @@ Route::prefix('auth')->middleware('api')->controller(AuthController::class)->gro
     Route::post('logout', 'logout');
     Route::post('refresh', 'refresh');
 });
+
+Route::get('/freecars', [CarController::class, 'showFree']);
