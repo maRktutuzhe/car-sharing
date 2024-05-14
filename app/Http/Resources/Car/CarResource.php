@@ -3,6 +3,7 @@
 namespace App\Http\Resources\Car;
 
 use App\Http\Resources\Location\LocationResource;
+use App\Http\Resources\Rent\RentResource;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 
@@ -21,7 +22,7 @@ class CarResource extends JsonResource
     {
         $response = [
             'id' => $this->id,
-            'carmake_id' => $this->carmake_id,
+            'carmake_id' => $this->resource->carMake->name,
             'name' => $this->name,
             'number' => $this->number,
             'color' => $this->color,
@@ -31,10 +32,17 @@ class CarResource extends JsonResource
             'PTS' => $this->PTS,
         ];
 
+
+
         $includes = (array)$request->input('include', []);
 
         if (in_array('location', $includes)) {
             $response['location'] = new LocationResource($this->resource->locations->last());
+        }
+        if (in_array('rent', $includes)) {
+            $response['rent'] = new RentResource($this->resource->rents->last());
+            $response['price'] = $this->resource->price->minute;
+
         }
         return $response;
     }
