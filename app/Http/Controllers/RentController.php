@@ -70,7 +70,7 @@ class RentController extends Controller
      * @param StoreRentRequest $request
      * @return RentResource|string
      */
-    public function store(StoreRentRequest $request): RentResource|string
+    public function store(StoreRentRequest $request)
     {
         $service = new RentService();
         
@@ -80,19 +80,19 @@ class RentController extends Controller
             return new RentResource($rent);
         } catch (InvalidUserStatusException $e) {
 
-            return $e->getMessage();
+            return response()->json(['error' => $e->getMessage()]);
         } catch (InvalidUserBalanceException $e) {
 
-            return $e->getMessage();
+            return response()->json(['error' => $e->getMessage()]);
         } catch (InvalidCarStatusException $e) {
 
-            return $e->getMessage();
+            return response()->json(['error' => $e->getMessage()]);
         } catch (InvalidUserRentException $e) {
 
-            return $e->getMessage();
+            return response()->json(['error' => $e->getMessage()]);
         } catch (InvalidRentEndingException $e) {
 
-            return $e->getMessage();
+            return response()->json(['error' => $e->getMessage()]);
         }
     }
 
