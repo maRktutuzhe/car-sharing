@@ -25,7 +25,7 @@ class DatabaseSeeder extends Seeder
 
         User::factory()->create(['email' => 'mb89510335133@gmail.com']);
         User::factory()->create(['email' => 'a@a', 'password' => Hash::make('a')]);
-        User::factory(10)->create();
+        User::factory(20)->create();
         Car::factory(10)->has(Location::factory())->has(State::factory())->create();
         Price::factory(5)->create();
         Rent::factory(10)->create();

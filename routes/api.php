@@ -40,3 +40,4 @@ Route::prefix('auth')->middleware('api')->controller(AuthController::class)->gro
 });
 
 Route::get('/freecars', [CarController::class, 'showFree']);
+Route::get('/cluster', [UserController::class, 'clusterUsers']);

@@ -25,21 +25,38 @@ class RentService
      * @throws InvalidUserStatusException
      * @return Rent
      */
+
+    public function changeStatus(StoreRentRequest $request)
+    {
+        $car = Car::find($request->car_id);
+        if ($request->event == 'start') {
+            $data = ['status' => 'rented'];
+            $car->update($data);
+        }
+        if ($request->event == 'end') {
+            $data = ['status' => 'free'];
+            $car->update($data);
+        }
+        
+    }
+    
     public function check(StoreRentRequest $request): Rent
     {
         $user = User::find($request->user_id);
+        if ($request->event == "start") {}
 
-        if ($user->status == 'active') {
-            if ($user->balance < 150000) {
-                throw new InvalidUserBalanceException($user->balance);
+            if ($user->status == 'active') {
+                if ($user->balance < 150000) {
+                    throw new InvalidUserBalanceException($user->balance);
+                }
+                return $this->checkCar($request);
             }
-            return $this->checkCar($request);
-        }
-        if ($user->status == 'premium') {
-            return $this->checkCar($request);
-        };
+            if ($user->status == 'premium') {
+                return $this->checkCar($request);
+            };
+            
+            throw new InvalidUserStatusException($user->status);
         
-        throw new InvalidUserStatusException($user->status);
     }
 
     /**
@@ -94,12 +111,14 @@ class RentService
         $user = User::find($request->user_id);
         $car = Car::find($request->car_id);
 
-        if ($car->status != 'free') {
+        if ($car->status == 'free') {
             throw new InvalidCarStatusException;
         }
+        
+        return $this->createRent($request);
 
         if ($lastRent = $user->latestRent) {
-            if ($lastRent->event == 'start' && $lastRent->car == $car) {
+            if ($lastRent->event == 'start' && $lastRent->car->id == $car->id) {
                 return $this->createRent($request);
             }
         }

@@ -76,7 +76,7 @@ class RentController extends Controller
         
         try {
             $rent = $service->check($request);
-            
+            $service->changeStatus($request);
             return new RentResource($rent);
         } catch (InvalidUserStatusException $e) {
 
